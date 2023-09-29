@@ -1,0 +1,477 @@
+<div align = "right"><button class="button" *ngIf ="isshowMainButtons" (click) = "EmployeeuserLoginClick()">Login As Employee</button>
+
+    <button class="button" *ngIf ="isshowMainButtons" (click) = "userLoginClick()">Login As Customer</button>
+    
+    <button class="button" *ngIf ="isshowMainButtons" (click) = "createCustomerClick()">New Customer</button>
+    
+    <button class="button" *ngIf ="isshowMainButtons" (click) = "createEmployeeClick()">New Employee</button></div>
+    
+    <div  *ngIf = "isEmployeeLoginPage && !Employeeloginsuccessful">
+        <form [formGroup]="loginForm">
+            <div >
+                <label>User Name</label>
+                <input type="text" formControlName="username" class="form-control">
+            </div>
+            <div >
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control">
+            </div>
+    
+            <button class="button"  (click) = "login_Employee()"> Submit</button>
+        </form>
+    </div>
+    
+    <div *ngIf = "isLoginPage && !loginsuccessful">
+        <form [formGroup]="loginForm">
+            <div >
+                <label>User Name</label>
+                <input type="text" formControlName="username" class="form-control">
+            </div>
+            <div >
+                <label>Password</label>
+                <input type="password" formControlName="password" class="form-control">
+            </div>
+    
+            <button class="button"  (click) = "login()"> submit</button>
+        </form>
+    </div>
+    
+    
+    <div *ngIf= "isCustomerCreationPage">
+        <form [formGroup]="addCustomerForm">
+            <div >
+                <label> SSN </label>
+                <input type="text" formControlName="ssn" class="form-control">
+            </div>
+            <div >
+                <label> UserName </label>
+                <input type="text" formControlName="username" class="form-control">
+            </div>
+            <div >
+                <label> Password </label>
+                <input type="text" formControlName="password" class="form-control">
+            </div>
+            <div >
+                <label> FirstName </label>
+                <input type="text" formControlName="first_name" class="form-control">
+            </div>
+            <div >
+                <label> LastName </label>
+                <input type="text" formControlName="last_name" class="form-control">
+            </div>
+            <div >
+                <label> Phone Number </label>
+                <input type="text" formControlName="phone" class="form-control">
+            </div>
+            <div >
+                <label> Gender </label>
+                <input type="text" formControlName="gender" class="form-control">
+            </div>
+            <div >
+                <label> Address </label>
+                <input type="text" formControlName="address" class="form-control">
+            </div>
+            <div >
+                <label> DateofBirth (yyyy-mm-dd) </label>
+                <input type="text" formControlName="dateOfBirth" class="form-control">
+            </div>
+    
+            <button class="button" (click) = "CreateCustomer()"> Submit</button>
+        </form>
+    
+    </div>
+    
+    
+    <div *ngIf= "isEmployeeCreationPage">
+        <form [formGroup]="addEmployeeForm">
+            <div >
+                <label> SSN </label>
+                <input type="text" formControlName="ssn" class="form-control">
+            </div>
+            <div >
+                <label> UserName </label>
+                <input type="text" formControlName="username" class="form-control">
+            </div>
+            <div >
+                <label> Password </label>
+                <input type="text" formControlName="password" class="form-control">
+            </div>
+            <div >
+                <label> FirstName </label>
+                <input type="text" formControlName="first_name" class="form-control">
+            </div>
+            <div >
+                <label> LastName </label>
+                <input type="text" formControlName="last_name" class="form-control">
+            </div>
+            <div >
+                <label> Role </label>
+                <input type="text" formControlName="role" class="form-control">
+            </div>
+            <div >
+                <label> Salary </label>
+                <input type="text" formControlName="salary" class="form-control">
+            </div>
+            <div >
+                <label> PhoneNumber </label>
+                <input type="text" formControlName="phoneNumber" class="form-control">
+            </div>
+    
+            <button class="button" (click) = "CreateEmployee()"> Submit</button>
+        </form>
+    
+    </div>
+    
+    
+    <div *ngIf = "isEmployeeLoginPage && Employeeloginsuccessful">
+    
+        <button class="button" (click) = "createMedicineClick()"> Add Medicine</button>
+        <button class="button"  (click) = "getMedicineClick()"> Get Medicines</button>
+        <button class="button" (click) = "getExpiringMedicineClick()"> Get Expiring Medicines</button>
+        <button class="button" (click) = "createPrescriptionClick()"> Create Prescription </button>
+        <button class="button" (click) = "createPrescriptionDrugsClick()"> Create Prescription Drugs </button>
+        <button class="button" (click) = "createOrderClick()"> Create Order</button>
+        <button class="button" (click) = "createOrderedDrugsClick()"> Create Ordered Drugs </button>
+        <button class="button" (click) = "AssignEmployeeClick()"> Assign Employee</button>
+        <button class="button" (click) = "createBillClick()"> Create Bill</button>
+    
+        <div *ngIf = "isAssignEmployeePage">
+            <form [formGroup]="addEmployeeAssignForm">
+                <div >
+                    <select formControlName="prescriptionId">
+                        <option value="" disabled selected>Select prescription</option>
+                        <option *ngFor="let category of orderList" [ngValue]="category.prescriptionId" >
+                            {{category.prescriptionId}}
+                        </option>
+                    </select>
+                </div>
+        
+                <button class="button" (click) = "createEmployeeAssign()"> Submit</button>
+    
+    
+    
+            </form>
+        </div>
+    
+        <div *ngIf = "isPrescriptionCreatePage">
+            <form [formGroup]="addPrescriptionForm">
+                <div >
+                    <label> PrescriptionID </label>
+                    <input type="text" formControlName="prescriptionId" class="form-control">
+                </div>
+                <div >
+                    <label> SSN </label>
+                    <input type="text" formControlName="ssn" class="form-control">
+                </div>
+                <div >
+                    <label> DoctorID </label>
+                    <input type="text" formControlName="doctorId" class="form-control">
+                </div>
+        
+                <button class="button" (click) = "CreatePrescription()"> Submit</button>
+    
+    
+    
+            </form>
+        </div>
+
+        <div *ngIf = "isOrderedDrugsCreatePage">
+            <form [formGroup]="addOrderedDrugsForm">
+                <div >
+                    <label> OrderId </label>
+                    <input type="text" formControlName="OrderId" class="form-control">
+                </div>
+                <div >
+                    <label> DrugName </label>
+                    <input type="text" formControlName="drugName" class="form-control">
+                </div>
+                <div >
+                    <label> BatchNumber </label>
+                    <input type="text" formControlName="batchNumber" class="form-control">
+                </div>
+                <div >
+                    <label> OrderedQuantity </label>
+                    <input type="text" formControlName="orderedQuantity" class="form-control">
+                </div>
+                <div >
+                    <label> price (in dollars) </label>
+                    <input type="text" formControlName="price" class="form-control">
+                </div>
+        
+                <button class="button" (click) = "CreateOrderedDrugs()"> Submit</button>
+    
+    
+    
+            </form>
+        </div>
+
+        <div *ngIf = "isPrescriptionDrugsCreatePage">
+            <form [formGroup]="addPrescriptionDrugsForm">
+                <div >
+                    <label> PrescriptionID </label>
+                    <input type="text" formControlName="prescriptionId" class="form-control">
+                </div>
+                <div >
+                    <label> drugName </label>
+                    <input type="text" formControlName="drugName" class="form-control">
+                </div>
+                <div >
+                    <label> prescribedQuantity </label>
+                    <input type="text" formControlName="prescribedQuantity" class="form-control">
+                </div>
+        
+                <button class="button" (click) = "CreatePrescriptionDrugs()"> Submit</button>
+    
+    
+    
+            </form>
+        </div>
+    
+        <div *ngIf = "isBillEmployeePage">
+            <form [formGroup]="addBillForm">
+                <div >
+                    <label> OrderID </label>
+                    <input type="text" formControlName="orderId" class="form-control">
+                </div>
+                <div >
+                    <label> CustomerSSN </label>
+                    <input type="text" formControlName="customerssn" class="form-control">
+                </div>
+                <div >
+                    <label> TotalAmount </label>
+                    <input type="text" formControlName="totalAmount" class="form-control">
+                </div>
+                <div >
+                    <label> CustomerAmount </label>
+                    <input type="text" formControlName="customerAmount" class="form-control">
+                </div>
+        
+                <button class="button" (click) = "CreateBill()"> Submit</button>
+    
+    
+    
+            </form>
+        </div>
+    
+    
+        <div *ngIf = "isOrderGetPage">
+            <form [formGroup]="addOrderForm">
+                <div >
+                    <label> OrderID </label>
+                    <input type="text" formControlName="orderId" class="form-control">
+                </div>
+                <div >
+                    <label> PrescriptionID </label>
+                    <input type="text" formControlName="prescriptionId" class="form-control">
+                </div>
+                <div >
+                    <label> EmployeeID </label>
+                    <input type="text" formControlName="employeeId" class="form-control">
+                </div>
+                <div >
+                    <label> OrderDate </label>
+                    <input type="text" formControlName="orderDate" class="form-control">
+                </div>
+        
+                <button class="button" (click) = "CreateOrder()"> Submit</button>
+    
+    
+    
+            </form>
+        </div>
+
+        <div *ngIf = "isExpiringMedicinePage">
+            <table class="center" id="customers">
+                <thead>
+                    <tr>
+                        <td> DrugName </td>
+                        <td> BatchNumber </td>
+                        <td> Manufacturer </td>
+                        <td> StockQuantity </td>
+                        <td> ExpiryDate </td>
+                        <td> Price (in dollars) </td>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of expiringMedicinesList">
+                        <td> {{data.drugName}}</td>
+                        <td> {{data.batchNumber}}</td>
+                        <td> {{data.manufacturer}}</td>
+                        <td> {{data.stockQuantity}}</td>
+                        <td> {{data.expiryDate}}</td>
+                        <td> {{data.price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div *ngIf = "isMedicineGetPage">
+            <table class="center" id="customers">
+                <thead>
+                    <tr>
+                        <td> DrugName </td>
+                        <td> BatchNumber </td>
+                        <td> Manufacturer </td>
+                        <td> StockQuantity </td>
+                        <td> ExpiryDate </td>
+                        <td> Price (in dollars) </td>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of medicinesList">
+                        <td> {{data.drugName}}</td>
+                        <td> {{data.batchNumber}}</td>
+                        <td> {{data.manufacturer}}</td>
+                        <td> {{data.stockQuantity}}</td>
+                        <td> {{data.expiryDate}}</td>
+                        <td> {{data.price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div *ngIf = "isMedicineCreationPage">
+            <form [formGroup]="addMedicineForm">
+                <div >
+                    <label> DrugName </label>
+                    <input type="text" formControlName="drugName" class="form-control">
+                </div>
+                <div >
+                    <label> BatchNumber</label>
+                    <input type="text" formControlName="batchNumber" class="form-control">
+                </div>
+                <div >
+                    <label> Manufacturer </label>
+                    <input type="text" formControlName="manufacturer" class="form-control">
+                </div>
+                <div >
+                    <label> StockQuantity </label>
+                    <input type="text" formControlName="stockQuantity" class="form-control">
+                </div>
+                <div >
+                    <label> ExpiryDate (yyyy-mm-dd) </label>
+                    <input type="text" formControlName="expiryDate" class="form-control">
+                </div>
+                <div >
+                    <label> Price (in dollars) </label>
+                    <input type="text" formControlName="price" class="form-control">
+                </div>
+        
+                <button class="button" (click) = "CreateMedicine()"> Submit</button>
+    
+    
+    
+            </form>
+        </div>
+    </div>
+    
+    
+    <div *ngIf = "isLoginPage && loginsuccessful">
+    
+        <button class="button" (click) = "getPrescriptionClick()"> Get Prescription</button>
+        <button class="button" (click) = "getPrescriptiondrugsClick()"> Get Prescribed Drugs</button>
+        <button class="button" (click) = "getBillOrderedClick()"> Get Order Details</button>
+        <button class="button" (click) = "getBillOrderClick()"> Get Ordered Bill List</button>
+        <button class="button" (click) = "getBillClick()"> Get Bill List</button>
+
+    
+    
+        <div *ngIf = "isPrescriptionGetPage">
+            <table class="center" id="customers">
+                <thead>
+                    <tr>
+                        <td> PrescriptionID </td>
+                        <td> SSN </td>
+                        <td> DoctorID </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> {{prescriptionDTO.prescriptionId}}</td>
+                        <td> {{prescriptionDTO.ssn}}</td>
+                        <td> {{prescriptionDTO.doctorId}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+    
+        <div *ngIf = "isPrescriptiondrugsGetPage">
+            <table class="center" id="customers">
+                <thead>
+                    <tr>
+                        <td> PrescriptionID </td>
+                        <td> DrugName </td>
+                        <td> PrescribedQuantity </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of prescriptionDTO.prescribeddrugs">
+                        <td> {{data.prescriptionId}}</td>
+                        <td> {{data.drugName}}</td>
+                        <td> {{data.prescribedQuantity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div *ngIf = "isBillOrderedGetPage">
+            <table class="center" id="customers">
+                <thead>
+                    <tr>
+                        <td> OrderID </td>
+                        <td> prescriptionID </td>
+                        <td> EmployeeID </td>
+                        <td> OrderDate </td>
+                    </tr>
+                </thead>
+                <tbody>
+                        <td> {{billDTO.order.orderId}}</td>
+                        <td> {{billDTO.order.prescriptionId}}</td>
+                        <td> {{billDTO.order.employeeId}}</td>
+                        <td> {{billDTO.order.orderDate}}</td>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf = "isBillOrderGetPage">
+            <table class="center" id="customers">
+                <thead>
+                    <tr>
+                        <td> OrderID </td>
+                        <td> DrugName </td>
+                        <td> BatchNumber </td>
+                        <td> OrderedQuantity </td>
+                        <td> Price (in dollars) </td> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of billDTO.ordereddrugs">
+                        <td> {{data.orderId}}</td>
+                        <td> {{data.drugName}}</td>
+                        <td> {{data.batchNumber}}</td>
+                        <td> {{data.orderedQuantity}}</td>
+                        <td> {{data.price}}</td>
+                </tbody>
+            </table>
+        </div>
+    
+        <div *ngIf = "isBillGetPage">
+            <table class="center" id="customers">
+                <thead>
+                    <tr>
+                        <td> OrderID </td>
+                        <td> CustomerSSN </td>
+                        <td> TotalAmount </td>
+                        <td> CustomerAmount </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> {{billDTO.orderId}}</td>
+                        <td> {{billDTO.customerssn}}</td>
+                        <td> {{billDTO.totalAmount}}</td>
+                        <td> {{billDTO.customerAmount}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
